@@ -13,17 +13,22 @@
  ;; If there is more than one, they won't work right.
  )
 
-;; ***************************************************************************
-;; VARIABLES
-(setq js2-basic-offset 2)
+(prelude-require-packages '(nyan-mode))
 
-;; ***************************************************************************
-;; STARTUP
 (toggle-frame-maximized)
+(scroll-bar-mode -1)
+(nyan-mode)
 
-;; ***************************************************************************
-;; JAVASCRIPT
+;; key bindings
+
+(global-set-key (kbd "s-;") 'avy-goto-char)
+(global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "M-g f") 'avy-goto-line)
+(global-set-key (kbd "M-g w") 'avy-goto-word-1)
+
+
 ;; JS2-mode
+(setq js2-basic-offset 2)
 (defun my/use-eslint-from-node-modules ()
   (let* ((root (locate-dominating-file
                 (or (buffer-file-name) default-directory)
@@ -35,11 +40,4 @@
       (setq-local flycheck-javascript-eslint-executable eslint))))
 
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
-
 (js2-mode-hide-warnings-and-errors)
-
-;; ***************************************************************************
-;; Nyan
-
-(prelude-require-packages '(nyan-mode))
-(nyan-mode)
