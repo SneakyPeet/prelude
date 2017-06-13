@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (all-the-icons nyan-mode yaml-mode clojure-mode vkill exec-path-from-shell zop-to-char zenburn-theme which-key volatile-highlights undo-tree smartrep smartparens smart-mode-line operate-on-number move-text magit projectile ov imenu-anywhere guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck expand-region epl editorconfig easy-kill diminish diff-hl discover-my-major dash crux browse-kill-ring beacon anzu ace-window))))
+    (parinfer all-the-icons nyan-mode yaml-mode clojure-mode vkill exec-path-from-shell zop-to-char zenburn-theme which-key volatile-highlights undo-tree smartrep smartparens smart-mode-line operate-on-number move-text magit projectile ov imenu-anywhere guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck expand-region epl editorconfig easy-kill diminish diff-hl discover-my-major dash crux browse-kill-ring beacon anzu ace-window))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -13,7 +13,7 @@
  ;; If there is more than one, they won't work right.
  )
 
-(prelude-require-packages '(nyan-mode neotree all-the-icons))
+(prelude-require-packages '(nyan-mode neotree all-the-icons parinfer))
 
 (toggle-frame-maximized)
 (scroll-bar-mode -1)
@@ -58,3 +58,12 @@
               (neotree-find file-name)))
       (message "Could not find git project root."))))
 (global-set-key [f8] 'neotree-project-dir)
+
+;;parinfer
+(global-set-key (kbd "C-`") 'parinfer-toggle-mode)
+(setq parinfer-extensions '(defaults pretty-parens smart-yank smart-tab))
+(add-hook 'clojure-mode-hook #'parinfer-mode)
+(add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
+(add-hook 'common-lisp-mode-hook #'parinfer-mode)
+(add-hook 'scheme-mode-hook #'parinfer-mode)
+(add-hook 'lisp-mode-hook #'parinfer-mode)
