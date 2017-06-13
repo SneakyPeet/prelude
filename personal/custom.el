@@ -25,6 +25,7 @@
 (global-set-key (kbd "C-'") 'avy-goto-char-2)
 (global-set-key (kbd "M-g f") 'avy-goto-line)
 (global-set-key (kbd "M-g w") 'avy-goto-word-1)
+(global-set-key (kbd "M-p") 'ace-window)
 
 
 ;; JS2-mode
@@ -68,7 +69,6 @@
 (add-hook 'scheme-mode-hook #'parinfer-mode)
 (add-hook 'lisp-mode-hook #'parinfer-mode)
 
-
 ;;firacode
 (when (window-system)
   (set-default-font "Fira Code"))
@@ -100,4 +100,4 @@
              ))
   (dolist (char-regexp alist)
     (set-char-table-range composition-function-table (car char-regexp)
-                          `([,(cdr char-regexp) 0 font-shape-gstring])))
+                          `([,(cdr char-regexp) 0 font-shape-gstring]))))
