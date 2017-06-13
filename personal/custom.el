@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (nyan-mode yaml-mode clojure-mode vkill exec-path-from-shell zop-to-char zenburn-theme which-key volatile-highlights undo-tree smartrep smartparens smart-mode-line operate-on-number move-text magit projectile ov imenu-anywhere guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck expand-region epl editorconfig easy-kill diminish diff-hl discover-my-major dash crux browse-kill-ring beacon anzu ace-window))))
+    (all-the-icons nyan-mode yaml-mode clojure-mode vkill exec-path-from-shell zop-to-char zenburn-theme which-key volatile-highlights undo-tree smartrep smartparens smart-mode-line operate-on-number move-text magit projectile ov imenu-anywhere guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck expand-region epl editorconfig easy-kill diminish diff-hl discover-my-major dash crux browse-kill-ring beacon anzu ace-window))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -13,7 +13,7 @@
  ;; If there is more than one, they won't work right.
  )
 
-(prelude-require-packages '(nyan-mode))
+(prelude-require-packages '(nyan-mode neotree all-the-icons))
 
 (toggle-frame-maximized)
 (scroll-bar-mode -1)
@@ -41,3 +41,20 @@
 
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 (js2-mode-hide-warnings-and-errors)
+
+;;NeoTree
+(setq neo-theme (if (display-graphic-p) 'icons 'nerd))
+(setq neo-smart-open t)
+(defun neotree-project-dir ()
+  "Open NeoTree using the git root."
+  (interactive)
+  (let ((project-dir (projectile-project-root))
+        (file-name (buffer-file-name)))
+    (neotree-toggle)
+    (if project-dir
+        (if (neo-global--window-exists-p)
+            (progn
+              (neotree-dir project-dir)
+              (neotree-find file-name)))
+      (message "Could not find git project root."))))
+(global-set-key [f8] 'neotree-project-dir)
