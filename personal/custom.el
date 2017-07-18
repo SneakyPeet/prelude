@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (markdown-mode dockerfile-mode clj-refactor parinfer all-the-icons nyan-mode yaml-mode clojure-mode vkill exec-path-from-shell zop-to-char zenburn-theme which-key volatile-highlights undo-tree smartrep smartparens smart-mode-line operate-on-number move-text magit projectile ov imenu-anywhere guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck expand-region epl editorconfig easy-kill diminish diff-hl discover-my-major dash crux browse-kill-ring beacon anzu ace-window))))
+    (csv-mode markdown-mode dockerfile-mode clj-refactor parinfer all-the-icons nyan-mode yaml-mode clojure-mode vkill exec-path-from-shell zop-to-char zenburn-theme which-key volatile-highlights undo-tree smartrep smartparens smart-mode-line operate-on-number move-text magit projectile ov imenu-anywhere guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck expand-region epl editorconfig easy-kill diminish diff-hl discover-my-major dash crux browse-kill-ring beacon anzu ace-window))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -18,6 +18,16 @@
 (toggle-frame-maximized)
 (scroll-bar-mode -1)
 (nyan-mode)
+
+;; pretty symbols
+
+(global-prettify-symbols-mode 1)
+(setq prettify-symbols-unprettify-at-point 'right-edge)
+
+(add-hook 'clojure-mode-hook
+          (lambda ()
+            (push '("fn" . 995) prettify-symbols-alist)))
+
 
 ;; key bindings
 
